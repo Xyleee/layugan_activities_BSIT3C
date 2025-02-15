@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/taos@latest/dist/taos.min.js" defer></script>
+    <link rel="stylesheet" href="/dist/output.css">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body class="bg-gray-50" style="background-image: url('{% static 'src/assets/light3.png' %}');">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-[#fbfcf8] shadow-sm z-50 transition-all duration-300 ease-in-out">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-gray-900">Portfolio</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Home</a>
+                    <a href="#about" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">About</a>
+                    <a href="#skills" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Skills</a>
+                    <a href="#projects" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Projects</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Contact</a>
+                </div>
+
+                <!-- Mobile Navigation Button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMenu()" class="text-gray-600 hover:text-gray-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-white">
+                <a href="#home" class="block px-3 py-2 text-gray-600 hover:text-blue-600">Home</a>
+                <a href="#about" class="block px-3 py-2 text-gray-600 hover:text-blue-600">About</a>
+                <a href="#projects" class="block px-3 py-2 text-gray-600 hover:text-blue-600">Projects</a>
+                <a href="#contact" class="block px-3 py-2 text-gray-600 hover:text-blue-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+<!-- Home Section -->
+<section id="home" class="min-h-screen flex items-center justify-center pt-16 px-4 transition-all duration-500 ease-in-out">
+    <div class="flex items-center">
+        <img src="{% static 'src/assets/mypic.jpg' %}" alt="Profile" class="w-80 h-80 object-cover rounded-full 
+        mr-8 shadow shadow duration-300  shadow-[0_0_20px_indigo] delay-[300ms] duration-[600ms] taos:scale-[1.2] taos:opacity-0
+        duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="400">
+
+        <div class="text-center">
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 transform transition-transform duration-500 ease-in-out hover:scale-105 animate-pulse
+            delay-[100ms] duration-[200ms] taos:translate-y-[-100%] taos:opacity-0" data-taos-offset="200">
+                Hello, I'm <span class="text-blue-600">James Kes Bacosa</span>
+            </h1>
+            <p id="text" class="text-xl md:text-2xl text-indigo-700 mb-8 transition-opacity duration-500 ease-in-out opacity-100 hover:opacity-80
+            delay-[200ms] duration-[200ms] taos:scale-[0.6] taos:opacity-0" data-taos-offset="400">
+                Aspiring Fullstack Developer
+            </p>
+            <a href="#contact" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none
+             focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2
+             duration-[200ms] taos:[transform:perspective(2500px)_rotateX(-100deg)] taos:invisible taos:[backface-visibility:hidden] duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0
+             " data-taos-offset="300">
+                Get in touch
+            </a>
+            <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium
+             text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500
+              group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200
+              duration-[200ms] taos:[transform:perspective(2500px)_rotateX(-100deg)] taos:invisible taos:[backface-visibility:hidden]
+              duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="300"
+            onclick="window.open('/src/assets/MemaCV.pdf')">
+                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
+
+                View CV Form
+                </span>
+        </div>
+    </div>
+</section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 bg-white transition-all duration-500 ease-in-out">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 transition-opacity duration-500 ease-in-out opacity-100 hover:opacity-80 
+            delay-[100ms] duration-[200ms] taos:translate-y-[100%] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="300">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-gray-600 transition-opacity duration-500 ease-in-out opacity-100 hover:opacity-80 
+                    delay-[200ms] duration-[200ms] taos:translate-y-[100%] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="300">
+                        Motivated and enthusiastic aspiring Full Stack Developer with a solid foundation in web development
+                        technologies and a strong passion for learning. Proficient in front-end and back-end development,
+                        with hands-on experience building web applications through self-directed projects and coursework.
+                        Eager to apply skills in a professional environment, contribute to team success, and continue
+                        growing as a developer.
+                    </p>
+                    <p class="text-gray-600 transition-opacity duration-500 ease-in-out opacity-100 hover:opacity-80 
+                    delay-[100ms] duration-[200ms] taos:translate-y-[100%] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="300">
+                        When I'm not coding, you can find me exploring new technologies, contributing to 
+                        open-source projects, or sharing my knowledge through technical writing.
+                    </p>
+                </div>
+       
+                    <img src="{% static 'src/assets/pic1.jpg' %}" alt="About Me" class="mx-auto w-64 h-64 object-cover rounded-full
+                    delay-[200ms] duration-[300ms] taos:translate-x-[100%] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="400">
+                </div>
+            </div>
+        </div>
+    </section>
+<br>
+<br>
+<br>
+<br>
+
+<!-- Skills Section -->
+<section id="skills" class="py-20 px-4 bg-gray-50 transition-all duration-500 ease-in-out ">
+    <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-12 transition-opacity duration-500 ease-in-out opacity-100 hover:opacity-80">My Skills</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-x-28 gap-y-6">
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-[0_0_10px_blue] transition-transform duration-500 ease-in-out hover:scale-105 w-60
+            delay-[100ms] duration-[100ms] taos:translate-y-[100%] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0"" data-taos-offset="100">
+                <h3 class="text-xl font-semibold mb-4">HTML</h3>
+                <img src="{% static 'src/assets/html-5.png' %}" alt="Project 1" class="mb-4 rounded mx-auto w-32 h-32 transition-transform duration-500 ease-in-out hover:scale-105">
+                <p class="text-gray-600">Proficient in creating structured web pages.</p>
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-300">
+                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full mt-4" style="width: 95%"> 95%</div>
+                  </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-[0_0_10px_blue] transition-transform duration-500 ease-in-out hover:scale-105 w-60
+            delay-[125ms] duration-[125ms] taos:translate-y-[100%] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0"" data-taos-offset="125">
+                <h3 class="text-xl font-semibold mb-4">CSS</h3>
+                <img src="{% static 'src/assets/css-3.png' %}" alt="Project 1" class="mb-4 rounded mx-auto w-32 h-32 transition-transform duration-500 ease-in-out hover:scale-105">
+                <p class="text-gray-600">Experienced in styling and layout design.</p>
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-300">
+                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full mt-4" style="width: 85%"> 85%</div>
+                  </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-[0_0_10px_blue] transition-transform duration-500 ease-in-out hover:scale-105 w-60 
+            delay-[150ms] duration-[150ms] taos:translate-y-[100%] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="150">
+                <h3 class="text-xl font-semibold mb-4">JavaScript</h3>
+                <img src="{% static 'src/assets/js.png' %}" alt="Project 1" class="mb-4 rounded mx-auto w-32 h-32 transition-transform duration-500 ease-in-out hover:scale-105">
+                <p class="text-gray-600">Skilled in adding interactivity .</p>
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-300">
+                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full mt-4" style="width: 70%"> 70%</div>
+                  </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-[0_0_10px_blue] transition-transform duration-500 ease-in-out hover:scale-105 w-60
+            delay-[175ms] duration-[175ms] taos:translate-y-[100%] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="175">
+                <h3 class="text-xl font-semibold mb-4">PHP</h3>
+                <img src="{% static 'src/assets/php.png' %}" alt="Project 1" class="mb-4 rounded mx-auto w-32 h-32 transition-transform duration-500 ease-in-out hover:scale-105">
+                <p class="text-gray-600">Familiar with API using PHP.</p>
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-300">
+                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full mt-4" style="width: 75%"> 75%</div>
+                  </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-[0_0_10px_blue] transition-transform duration-500 ease-in-out hover:scale-105 w-60
+            delay-[100ms] duration-[100ms] taos:translate-y-[100%] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="100">
+                <h3 class="text-xl font-semibold mb-4">Java</h3>
+                <img src="{% static 'src/assets/java.png' %}" alt="Project 1" class="mb-4 rounded mx-auto w-32 h-32 transition-transform duration-500 ease-in-out hover:scale-105">
+                <p class="text-gray-600">Experience in Java Development.</p>
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-300">
+                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full mt-4" style="width: 70%"> 70%</div>
+                  </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-[0_0_10px_blue] transition-transform duration-500 ease-in-out hover:scale-105 w-60
+            delay-[125ms] duration-[125ms] taos:translate-y-[100%] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="125">
+                <h3 class="text-xl font-semibold mb-4">Python</h3>
+                <img src="{% static 'src/assets/python.png' %}" alt="Project 1" class="mb-4 rounded mx-auto w-32 h-32 transition-transform duration-500 ease-in-out hover:scale-105">
+                <p class="text-gray-600">Knowledgeable in Data Analyzation.</p>
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-300">
+                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full mt-4" style="width: 70%"> 70%</div>
+                  </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-[0_0_10px_blue] transition-transform duration-500 ease-in-out hover:scale-105 w-60
+            delay-[150ms] duration-[150ms] taos:translate-y-[100%] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="150">
+                <h3 class="text-xl font-semibold mb-4">SQL</h3>
+                <img src="{% static 'src/assets/database.png' %}" alt="Project 1" class="mb-4 rounded mx-auto w-32 h-32 transition-transform duration-500 ease-in-out hover:scale-105">
+                <p class="text-gray-600">Knowledgeable in database.</p>
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-300">
+                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full mt-4" style="width: 70%"> 70%</div>
+                  </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-[0_0_10px_blue] transition-transform duration-500 ease-in-out hover:scale-105 w-60
+            delay-[175ms] duration-[175ms] taos:translate-y-[100%] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="175">
+                <h3 class="text-xl font-semibold mb-4">Angular</h3>
+                <img src="{% static 'src/assets/angular.png' %}" alt="Project 1" class="mb-4 rounded mx-auto w-32 h-32 transition-transform duration-500 ease-in-out hover:scale-105">
+                <p class="text-gray-600">Knowledgeable in Angular Framework.</p>
+                <div class="w-full bg-gray-200 rounded-full dark:bg-gray-300">
+                    <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full mt-4" style="width: 65%"> 65%</div>
+                  </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 bg-gray-50 transition-all duration-500 ease-in-out">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-center mb-12 transition-opacity duration-500 ease-in-out opacity-100 hover:opacity-80">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Project 1 -->
+                <div class="w-60 h-80 bg-white rounded-3xl text-neutral-800 p-4 flex flex-col items-start justify-between gap-3 hover:bg-gray-100 hover:shadow-2xl shadow border
+                delay-[200ms] duration-[200ms] taos:[transform:translate3d(200px,0,0)_scale(0.6)] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="400">
+                    <img src="{% static 'src/assets/credify.png' %}" alt="Credify Project" class="w-52 h-32 rounded-2xl object-cover">
+                    <div>
+                        <p class="font-extrabold">Credify</p>
+                        <p>Faculty Profiling and Development Monitoring System</p>
+                    </div>
+                    <div class="flex justify-center w-full">
+                        <a href="https://github.com/rjanciro/Final-Credify" class="bg-sky-700 font-extrabold p-2 px-6 rounded-xl hover:bg-sky-500 transition-colors text-white">See more</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="w-60 h-80 bg-white rounded-3xl text-neutral-800 p-4 flex flex-col items-start justify-between gap-3 hover:bg-gray-100 hover:shadow-2xl shadow border
+                delay-[250ms] duration-[250ms] taos:scale-[0.6] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="400">
+                    <img src="{% static 'src/assets/weather.jpg' %}" alt="Weather App" class="w-52 h-40 rounded-2xl object-cover">
+                    <div>
+                        <p class="font-extrabold">Weather App</p>
+                        <p>Weather application using Angular</p>
+                    </div>
+                    <div class="flex justify-center w-full">
+                        <a href="https://github.com/Xyleee/WeatherApp" class="bg-sky-700 font-extrabold p-2 px-6 rounded-xl hover:bg-sky-500 transition-colors text-white">See more</a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="w-60 h-80 bg-white rounded-3xl text-neutral-800 p-4 flex flex-col items-start justify-between gap-3 hover:bg-gray-100 hover:shadow-2xl shadow border
+                delay-[300ms] duration-[300ms] taos:scale-[0.6] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="400">
+                    <img src="{% static 'src/assets/tooth.png' %}" alt="Dental Clinic Management System" class="w-52 h-40 rounded-2xl object-cover">
+                    <div>
+                        <p class="font-extrabold">Dental Clinic Management System</p>
+                        <p>Created using PHP</p>
+                    </div>
+                    <div class="flex justify-center w-full">
+                        <a href="https://github.com/Xyleee/DCMS-SALT-Solutions" class="bg-sky-700 font-extrabold p-2 px-6 rounded-xl hover:bg-sky-500 transition-colors text-white">See more</a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="w-60 h-80 bg-white rounded-3xl text-neutral-800 p-4 flex flex-col items-start justify-between gap-3 hover:bg-gray-100 hover:shadow-2xl shadow border
+                delay-[400ms] duration-[400ms] taos:[transform:translate3d(-200px,0,0)_scale(0.6)] taos:opacity-0 duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0" data-taos-offset="200">
+                    <img src="{% static 'src/assets/online-library.png' %}" alt="Online Library" class="w-52 h-40 rounded-2xl object-cover">
+                    <div>
+                        <p class="font-extrabold">Online Library</p>
+                        <p>Created using PHP</p>
+                    </div>
+                    <div class="flex justify-center w-full">
+                        <a href="https://github.com/Xyleee/LMS" class="bg-sky-700 font-extrabold p-2 px-6 rounded-xl hover:bg-sky-500 transition-colors text-white">See more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<br>
+<br>
+<br>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-white transition-all duration-500 ease-in-out">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-12 transition-opacity duration-500 ease-in-out opacity-100 hover:opacity-80
+            delay-[100ms] duration-[200ms] taos:scale-[0.6] taos:opacity-0" data-taos-offset="400
+            duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0">Get in Touch</h2>
+            <div class="flex justify-center space-x-6 mb-8">
+                <!-- Social Links -->
+                <a href="#" class="text-gray-600 hover:text-blue-600 transition-transform duration-500 ease-in-out hover:scale-105
+                delay-[100ms] duration-[200ms] taos:scale-[0.6] taos:opacity-0" data-taos-offset="400
+            duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-600 hover:text-blue-600 transition-transform duration-500 ease-in-out hover:scale-105
+                delay-[100ms] duration-[200ms] taos:scale-[0.6] taos:opacity-0" data-taos-offset="400
+            duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="max-w-md mx-auto delay-[100ms] duration-[200ms] taos:scale-[0.6] taos:opacity-0" data-taos-offset="400
+            duration-[1000ms] [animation-iteration-count:infinite] taos:opacity-0">
+                <form class="space-y-6 ">
+                    <input type="text" placeholder="Your Name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 transition-all duration-500 ease-in-out hover:shadow-lg">
+                    <input type="email" placeholder="Your Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 transition-all duration-500 ease-in-out hover:shadow-lg">
+                    <textarea placeholder="Your Message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 transition-all duration-500 ease-in-out hover:shadow-lg"></textarea>
+                    <button
+                    type="submit"
+                    class="flex justify-center gap-2 items-center mx-auto shadow-xl text-lg bg-gray-50 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-indigo-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group"
+                  >
+                    Send Message
+                    <svg
+                      class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-gray-700 group-hover:border-none p-2 rotate-45"
+                      viewBox="0 0 16 19"
+                      xmlns="http://www.w3.org/2000/svg"
+
+                    >
+                      <path
+                        d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+                        class="fill-gray-800 group-hover:fill-gray-800"
+                      ></path>
+                    </svg>
+                  </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="bg-white rounded-lg shadow m-4 dark:bg-gray-800 ">
+        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between
+        ">
+          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">James</a>. All Rights Reserved.
+        </span>
+        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+            <li>
+                <a href="#" class="hover:underline me-4 md:me-6">About</a>
+            </li>
+            <li>
+                <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+            </li>
+            <li>
+                <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+            </li>
+            <li>
+                <a href="#" class="hover:underline">Contact</a>
+            </li>
+        </ul>
+        </div>
+    </footer>
+    
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        $(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Taos
+        taos.init();
+    });
+    </script>
+
+
+</body>
+</html>
