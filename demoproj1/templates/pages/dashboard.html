@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %} Dashboard{% endblock %}
+
+{% block content %}
+<div class="p-6">
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-2xl font-semibold text-slate-800">Performance Overview</h1>
+        <div class="bg-white px-4 py-2 rounded-lg border border-slate-200">
+            <span class="text-sm text-slate-600">Last 30 days</span>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for item in data %}
+        <div class="bg-gradient-to-br from-slate-50 to-white rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 hover:border-slate-200">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-base font-medium text-slate-600">{{ item.title }}</h2>
+                    <div class="h-10 w-10 bg-indigo-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex items-baseline space-x-2">
+                    <p class="text-3xl font-bold text-slate-800">
+                        {% if item.title == 'Revenue' %}${% endif %}{{ item.count }}
+                    </p>
+                    <span class="text-sm font-medium text-green-600 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+                        </svg>
+                        12%
+                    </span>
+                </div>
+                <div class="mt-4 border-t border-slate-100 pt-3">
+                    <span class="text-sm text-slate-500">Compared to previous period</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
